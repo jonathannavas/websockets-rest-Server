@@ -18,9 +18,18 @@
             <a class="btn btn-primary mt-3" href="#" onclick="signOut();">Sign out</a>
 
         </div>
-        <div class="col-sm-6">
-
+        <div class="col-sm-6 ">
+            <h1>Login</h1>
+            <hr>
+            <form class="d-grid" action="" method="post">
+                <input type="text" class="form-control mb-2" name="correo" placeholder="Correo" />
+                <input type="password" class="form-control mb-2" name="password" placeholder="Contraseña" />
+                <button type="submit" class="btn btn-primary">
+                    Ingresar
+                </button>
+            </form>
         </div>
+
     </div>
     
     
@@ -28,40 +37,7 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-    <script>
-        var url = ( window.location.hostname.includes('localhost'))
-            ? 'http://localhost:8080/api/auth/google'
-            : 'https://jn-rest-server-node.herokuapp.com/api/auth/google';
-
-        function onSignIn(googleUser) {
-
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            
-            var id_token = googleUser.getAuthResponse().id_token;
-            const data = { id_token };
-            fetch( url , {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then( resp => resp.json())
-            .then(data => console.log('Nuestro Server - ', data))
-            .catch( console.log );
-
-        }
-
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-            console.log('User signed out.');
-            });
-        }
-        
-    </script>
+    <script src="./js/auth.js"></script>
 
 
 </body>
